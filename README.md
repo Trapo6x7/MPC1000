@@ -1,55 +1,56 @@
-# Vanilla-Front-PromessesJS
+Vanilla-Front-Drumpad
+Drum pad
+📺 Présentation
+Les data-attributes
 
-# Promesse JS
+📚️ Ressources
+Attributs data-* et API dataset - Alsacreations
 
+Use Data Attribute Value on CSS
 
+Complete Guide Data Attribute CSS
 
-# 📚️ Ressources
+JavaScript Event KeyCodes
 
-* [Utiliser les promesses](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses)
-* [Apprendre le JavaScript : Promise](https://www.youtube.com/watch?v=05mKXSdkCJg)
-* [JavaScript Promises In 10 Minutes](https://www.youtube.com/watch?v=DHvZLI7Db8E)
-* [JavaScript Async Await](https://www.youtube.com/watch?v=V_Kr9OSfDeU)
+⛳ TP Drum Pad
+Dans ce TP, nous allons réaliser un clavier numérique en utilisant toutes les notions que nous avons vu sur les transitions et les événements JS.
 
+Vous allez devoir appréhender le code déjà fourni. Analysez-le afin de pouvoir l'utiliser.
 
-# 🔉 TP beat-box
+Dans ce TP vous n'avez aucun code CSS à ajouter
 
-Vous avez réussi à coder un magnifique Drumpad, nous allons donc l'utiliser pour faire une boîte à musique.
+Vous êtes fortement encouragés à réaliser ce tp en groupe et à partager vos découvertes. Sans entraide et sans collaboration il s’avérera très compliqué !
 
-Le principe est simple, nous allons coder un enchaînement de sons lors de la pression d'un bouton, comme du papier à musique passé dans un vieux piano de saloon américain.
+La compréhension des consignes fait partie de l'exercice
+Petite explication :
+Créer le code javascript permettant de jouer un son lorsqu'on appuis sur la bonne touche (keycode) du clavier
 
-Pour ce faire nous allons devoir utiliser les promesses JavaScript.
+Drum Pad Exercice CodePen
 
-Pour réaliser ce TP vous allez devoir comprendre et intégrer une nouvelle fonctionnalité de JavaScript qui est normalement utilisée pour gérer des requêtes API par exemple.
+Consignes
+Voici votre point de départ, le but est d'arriver à ce rendu : https://i.gyazo.com/b258219bebb02401e6d7f72e76baebda.gif
+Dans un premier temps, vous devez construire les 8 autres pad du drumpad
+Attribuez aux touches du pad la lettre correspondante au keycode du clavier de votre ordinateur (en fonction du data-attribute)
+Vous allez devoir faire interagir les balises audio lors de la pression d'une touche de clavier avec les pad que vous avez créées
+Pour ce faire : coder la fonction playSound()
+cette fonction doit sélectionner la balise audio qui correspond à la bonne touche du clavier
+elle doit faire jouer le son de cette balise
+elle doit aussi ajouter l'animation CSS de "pression" du pad qui correspond à sa balise audio (qui est déjà codé dans la partie css)
+Créez un écouteur d’événement capable d'écouter la pression d'une touche de clavier et qui lance la fonction playSound()
+A ce stade, si vous avez réussi le reste, le pad reste "enfoncé" dans le drumpad si vous appuyez sur la touche du clavier.
+Créez la fonction removeTransition() pour gérer ce problème avec un écouteur d’événement qui regarde si un pad a fini son animation.
+Comportement attendu :
 
-Dans le contexte de ce TP, vous êtes lancés dans le grand bain sans brassards. Vous n'avez que ces consignes pour arriver à un résultat. 
-
-
-## **Consignes :**
-
-
-
-* A l'aide des ressources et de tous tutoriels que vous pouvez trouver sur le net, nous allons coder la fonction beatBox()
-* Cette fonction se déclenche quand on appuie sur un nouveau bouton créé à cette occasion
-* La fonction beatBox() contient 2 fonctions :
-    * une fonction simulateKey() qui simule la pression d'une touche de clavier (ce qui permet de déclencher le code de votre drumpad déjà fait)
-        * Pour simuler la pression d'une touche, je veux créer et paramétrer un nouvel event js
-        * ensuite je veux dispatch cet event dans le document
-    * une fonction playBeat() qui renvoie une nouvelle promesse
-* Dans la fonction beatBox() toujours, faites une chaîne de promesse pour créer un beat
-
-
-## **Comportement attendu :**
-
-
-
-* la fonction playBeat() prend dans ses arguments une variable de temps utilisé avec un setTimeout()
-
-
-# 🏆 Objectifs
-
-
-
-* Appréhender de nouveaux concept sans en avoir peur
-* Comprendre que JS est un langage asynchrone
-* Être initié aux promesses
+Je peux jouer un son à la pression d'un pad même si la lecture de la balise audio n'est pas terminé
+👀 A voir !
+Calculette : make a calculator js
+Simple game : game
+Memory game : Dinosaur Memory Game🦖
+🏆 Objectifs
+Comprendre et maîtriser la manipulation CSS et JS des data-attributs
+Comprendre et maîtriser la définition et l'utilisation des évents JS
+Persévérer devant un défi complexe !
+🧠 A retenir
+Les attributs data-* nous permettent de stocker des informations supplémentaires sur les éléments sémantiques standard (balises html)
+On passe un nom d’événement en premier argument de la méthode addEventListener() puis le nom d’une fonction à exécuter en second argument.
+e est une référence pour l'objet événement qui sera passé aux gestionnaires d'événements. L'objet événement possède essentiellement de nombreuses méthodes et propriétés intéressantes qui peuvent être utilisées dans les gestionnaires d'événements.
