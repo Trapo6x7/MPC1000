@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
 
 html, body {
-  background: linear-gradient(to left, #fd746c , #ff9068);
+  background: linear-gradient(135deg, #a0c4ff, #c4a3ff); /* Dégradé doux de bleu clair vers violet pâle */
   height: 100%;
   width: 100%;
   display: flex;
@@ -10,71 +10,134 @@ html, body {
   align-items: center;
   overflow: hidden;
   font-family: Raleway, sans-serif;
+  margin: 0;
 }
+
 h1 {
-  color: black;
-  font-size: 5vw;
-  letter-spacing: 6px;
+  color: #fff8f5; /* Gris foncé pour un contraste doux avec le fond pastel */
+  font-size: 6vw;
+  letter-spacing: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Lueur subtile blanche pour un effet moderne */
 }
+
 .pad {
-  width: 400px;
+  width: 350px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 20px 30px;
-  background-color: white;
-  border: 4px solid black;
-  box-shadow: 4px 4px 0 0 black;
+  padding: 18px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fond blanc légèrement transparent pour donner de la légèreté */
+  border: 2px solid #dcdcdc; /* Bordure très subtile en gris clair */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre légère mais présente */
+  transition: all 0.3s ease;
 }
+
+.pad:hover {
+  transform: scale(1.05); /* Effet d'agrandissement très subtil pour ajouter de la fluidité */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Ombre un peu plus marquée au survol */
+}
+
 .key {
   width: 100px;
   height: 100px;
-  margin: 10px 0;
+  margin: 12px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 20px;
   font-weight: 500;
-  color: black;
+  color: #333333; /* Gris foncé pour un contraste doux avec les couleurs pâles */
   background-color: white;
-  border: 4px solid black;
-  box-shadow: 4px 4px 0 0 black;
-  user-select: none;
+  border: 2px solid #dcdcdc; /* Bordure légère et subtile */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce mais subtile */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
   transform: translate(0, 0);
 }
-.sound {
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #ff9068;
-  margin-top: 7px
+
+.key:active {
+  transform: translate(4px, 4px); /* Effet de pression douce */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère lors du clic */
 }
-.sound2 {
-    font-size: 14px;
-    text-transform: uppercase;
-    color: #fff8f5;
-    margin-top: 7px
-  }
-.red{
-    background-color: #fd746c;
-    color: #fff8f5;
-}
-.green{
-    background-color: #6cfd9c;
-    color: #fff8f5;
-}
+
 .key.playing {
-  background-color: #ddd;
-  box-shadow: 0 0 0 0 black;
-  transform: translate(4px, 4px);
-  border-color: #fd746c;
-  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: #a0c4ff; /* Bleu clair pour indiquer l'activation */
+  border-color: #6c7bff; /* Violet pastel clair pour la bordure active */
+  box-shadow: 0 4px 10px rgba(160, 196, 255, 0.5); /* Lueur douce pour l'activation */
+  transform: translate(4px, 4px) scale(1.1);
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 .key.playing .sound {
-  color: #fd746c;
-  transform: scale(1.5);
-  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  color: #fff8f5; /* Blanc cassé pour le texte actif */
+  transform: scale(1.3); /* Agrandissement subtil du texte au clic */
+  transition: all 0.3s ease-in-out;
 }
-.bggreen{
-  background-color: green;
+
+.sound {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #6c7bff; /* Violet pâle pour les labels des sons */
+  margin-top: 7px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sound2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #fff8f5; /* Gris clair pour les autres labels */
+  margin-top: 7px;
+}
+
+.key:hover {
+  background-color: #6c7bff; /* Violet pâle au survol pour l'activation */
+  color: white;
+  box-shadow: 0 5px 15px rgba(160, 196, 255, 0.3); /* Lueur bleutée au survol */
+}
+
+.key.red {
+  background-color: #d8a0ff; /* Violet clair pour les touches spéciales */
+  color: #fff8f5;
+}
+
+.key.green {
+  background-color: #a0f0ff; /* Bleu clair pour les touches spécifiques */
+  color: #fff8f5;
+}
+
+.key.red.playing {
+  background-color: #b186e2; /* Violet légèrement plus foncé au survol */
+  border-color: #d8a0ff;
+}
+
+.key.green.playing {
+  background-color: #82c7f0; /* Bleu plus vif lors de l'activation */
+  border-color: #a0f0ff;
+}
+
+.bggreen {
+  background-color: #82c7f0; /* Bleu clair pour les éléments en surbrillance */
+}
+
+@media screen and (max-width: 600px) {
+  .pad {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .key {
+    width: 85px;
+    height: 85px;
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 8vw;
+  }
 }

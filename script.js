@@ -1,38 +1,94 @@
-document.addEventListener("keydown", handleKeyDown);
-document.addEventListener("keyup", handleKeyUp);
+document.addEventListener("keydown", handleKeyPress);
+document.addEventListener("keyup", handleKeyPress);
 
-// date.now chaque notes pour savoir le ryhtme
-// mettre ces nombres dans un tableau
-// lire le tableau
+let dateStartRecord;
+let notesRecorded = [];
+let recording = false;
+let playing = false;
+// LA BOITE A RYTHME
 
-function handleKeyDown(event) {
+function handleKeyPress(event) {
+  if (event.repeat) {
+    return;
+  }
+
   const keyCode = event.keyCode;
   const key = document.querySelector(`.key[data-key = '${keyCode}']`);
+  const audio = document.querySelector(`audio[data-key = '${keyCode}']`);
+
   if (!key) return;
-  key.classList.add("playing");
+
+  if (event.type === "keydown") {
+    key.classList.toggle("playing");
+  }
+
+  if (event.type === "keyup") {
+    if (keyCode !== 82 && keyCode !== 80) {
+      key.classList.toggle("playing");
+      return;
+    }
+
+    if (keyCode === 82) {
+      triggerRecord();
+    }
+
+    if (keyCode === 80) {
+      triggerPlay();
+    }
+  }
+
+  if (!audio) return;
+
+  playSound(audio);
+
+  if (recording) {
+    saveKey(event);
+  }
 }
 
-function handleKeyUp(event) {
-  const keyCode = event.keyCode;
-  const audio = document.querySelector(`audio[data-key = '${keyCode}']`);
-  const key = document.querySelector(`.key[data-key = '${keyCode}']`);
-  if (!key) return;
-  key.classList.remove("playing");
+function playSound(audio) {
   audio.currentTime = 0;
   audio.play();
-  
-  /* let playedTime = Date.now(event);
-  console.log(playedTime);
-  let objTimePlayed = {
-    calulateValueNotes: function () {
-      currentNote.key = event.key;
-      currentNote.time = playedTime
-      let currentYear = new Date().getUTCFullYear();
-      let notes = currentYear - this.playedTime;
-      console.log(notes);
-    },
-  };
-  let currentNote = Object.create(objTimePlayed);
-
-  console.log(objTimePlayed) */
 }
+
+function triggerRecord() {
+  dateStartRecord = Date.now();
+  recording = !recording;
+  if (recording === true) {
+    notesRecorded = [];
+  }
+}
+
+function saveKey(event) {
+  let playedTime = Date.now(event);
+  let currentTime = playedTime - dateStartRecord;
+  notesRecorded.push({ key: event.keyCode, time: currentTime });
+  console.log(notesRecorded);
+}
+
+function triggerPlay() {
+  playing = !playing;
+  if (playing === false) return;
+  notesRecorded.forEach((note) => {
+    const audio = document.querySelector(`audio[data-key = '${note.key}']`);
+    setTimeout(() => {
+      audio.play();
+    }, note.time);
+
+    key = note.key;
+    time = note.time;
+    simulateKey(note);
+  });
+}
+
+function simulateKey(note) {
+  const keyElement = document.querySelector(`div[data-key="${note.key}"]`);
+  if (keyElement) {
+    const eventKeyDown = new KeyboardEvent("keydown", { key: note.key }); 
+    document.dispatchEvent(eventKeyDown);
+    setTimeout(() => {keyElement.classList.toggle("playing"); 
+  }, note.time);
+}
+}
+
+function sampledBeat() {}
