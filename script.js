@@ -1,6 +1,6 @@
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
-
+let start = Date.now();
 // date.now chaque notes pour savoir le ryhtme
 // mettre ces nombres dans un tableau
 // lire le tableau
@@ -20,19 +20,9 @@ function handleKeyUp(event) {
   key.classList.remove("playing");
   audio.currentTime = 0;
   audio.play();
-  
-  /* let playedTime = Date.now(event);
-  console.log(playedTime);
-  let objTimePlayed = {
-    calulateValueNotes: function () {
-      currentNote.key = event.key;
-      currentNote.time = playedTime
-      let currentYear = new Date().getUTCFullYear();
-      let notes = currentYear - this.playedTime;
-      console.log(notes);
-    },
-  };
-  let currentNote = Object.create(objTimePlayed);
 
-  console.log(objTimePlayed) */
+  let playedTime = Date.now(event);
+  let currentTime = playedTime - start;
+
+  console.log(event.key, currentTime);
 }
