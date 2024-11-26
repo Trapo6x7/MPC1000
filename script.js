@@ -1,28 +1,80 @@
-document.addEventListener("keydown", handleKeyDown);
-document.addEventListener("keyup", handleKeyUp);
-let start = Date.now();
-// date.now chaque notes pour savoir le ryhtme
-// mettre ces nombres dans un tableau
-// lire le tableau
+document.addEventListener("keydown", handleKeyPress);
+document.addEventListener("keyup", handleKeyPress);
 
-function handleKeyDown(event) {
+let dateStartRecord;
+let notesRecorded = [];
+let recording = false;
+
+// LA BOITE A RYTHME
+
+function handleKeyPress(event) {
+  if (event.repeat) {
+    return;
+  }
+
   const keyCode = event.keyCode;
   const key = document.querySelector(`.key[data-key = '${keyCode}']`);
+  const audio = document.querySelector(`audio[data-key = '${keyCode}']`);
+
   if (!key) return;
-  key.classList.add("playing");
+
+  if (event.type === "keydown") {
+    key.classList.toggle("playing");
+  }
+
+  if (event.type === "keyup") {
+    if (keyCode !== 82 && keyCode !== 80) {
+      key.classList.toggle("playing");
+      return;
+    }
+
+    if (keyCode === 82) {
+      triggerRecord();
+    }
+
+    if (keyCode === 80) {
+      triggerPlay();
+    }
+  }
+
+  if (!audio) return;
+
+  playSound(audio);
+
+  if (recording) {
+    saveKey(event);
+  }
 }
 
-function handleKeyUp(event) {
-  const keyCode = event.keyCode;
-  const audio = document.querySelector(`audio[data-key = '${keyCode}']`);
-  const key = document.querySelector(`.key[data-key = '${keyCode}']`);
-  if (!key) return;
-  key.classList.remove("playing");
+function playSound(audio) {
   audio.currentTime = 0;
   audio.play();
+}
 
+function triggerRecord() {
+  dateStartRecord = Date.now();
+  recording = !recording;
+  if (recording === true) {
+    notesRecorded = [];
+  }
+}
+
+function saveKey(event) {
   let playedTime = Date.now(event);
-  let currentTime = playedTime - start;
+  let currentTime = playedTime - dateStartRecord;
+  notesRecorded.push({ key: event.key, time: currentTime });
+  console.log(notesRecorded);
+  
+}
 
-  console.log(event.key, currentTime);
+function triggerPlay() {
+
+}
+
+function simulateKey(){
+
+}
+
+function playBeat(){
+
 }
