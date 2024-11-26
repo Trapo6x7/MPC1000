@@ -32,7 +32,7 @@ function handleKeyPress(event) {
       triggerRecord();
     }
 
-    if (keyCode === 80) {
+    if (keyCode === 80 ) {
       triggerPlay();
     }
   }
@@ -62,19 +62,23 @@ function triggerRecord() {
 function saveKey(event) {
   let playedTime = Date.now(event);
   let currentTime = playedTime - dateStartRecord;
-  notesRecorded.push({ key: event.key, time: currentTime });
+  notesRecorded.push({ key: event.keyCode, time: currentTime });
   console.log(notesRecorded);
-  
 }
 
 function triggerPlay() {
-
+    notesRecorded.forEach((note) =>{
+        const audio = document.querySelector(`audio[data-key = '${note.key}']`);
+     setTimeout(() =>{
+        audio.play()
+     },note.time)
+    })
 }
 
-function simulateKey(){
-
+ function simulateKey() {
+  const eventKeyDown = new KeyboardEvent("keydown", { key , time });
+  document.dispatchEvent(eventKeyDown);
+  console.log(keyCode);
 }
 
-function playBeat(){
-
-}
+function playBeat() {}
