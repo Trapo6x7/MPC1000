@@ -73,6 +73,7 @@ function triggerPlay() {
   notesRecorded.forEach((note) => {
     const audio = document.querySelector(`audio[data-key = '${note.key}']`);
     setTimeout(() => {
+      audio.currentTime = 0;
       audio.play();
     }, note.time);
     key = note.key;
