@@ -5,6 +5,7 @@ let dateStartRecord;
 let notesRecorded = [];
 let recording = false;
 let playing = false;
+let simulateTouch = false;
 // LA BOITE A RYTHME
 
 function handleKeyPress(event) {
@@ -74,7 +75,6 @@ function triggerPlay() {
     setTimeout(() => {
       audio.play();
     }, note.time);
-
     key = note.key;
     time = note.time;
     simulateKey(note);
@@ -83,12 +83,20 @@ function triggerPlay() {
 
 function simulateKey(note) {
   const keyElement = document.querySelector(`div[data-key="${note.key}"]`);
-  if (keyElement) {
-    const eventKeyDown = new KeyboardEvent("keydown", { key: note.key }); 
+  if ((simulateTouch = !simulateTouch)) {
+    const eventKeyDown = new KeyboardEvent("keydown", { key: note.key });
     document.dispatchEvent(eventKeyDown);
-    setTimeout(() => {keyElement.classList.toggle("playing"); 
-  }, note.time);
+    setTimeout(() => {
+      keyElement.classList.toggle("playing");
+    }, note.time);
+    simulateTouch = simulateTouch;
+  }
+  if ((simulateTouch = simulateTouch)) {
+    const eventKeyDown = new KeyboardEvent("keydown", { key: note.key });
+    document.dispatchEvent(eventKeyDown);
+    setTimeout(() => {
+      keyElement.classList.toggle("playing");
+    }, note.time * 1.1);
+    simulateTouch = !simulateTouch;
+  }
 }
-}
-
-function sampledBeat() {}
