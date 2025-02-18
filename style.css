@@ -125,20 +125,49 @@ h2 {
 .bggreen {
   background-color: #82c7f0; /* Bleu clair pour les éléments en surbrillance */
 }
+@media screen and (max-width: 768px) {
+  html, body {
+    flex-direction: column;
+    gap: 3vw;
+    overflow: auto;
+  }
 
-@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 4vw;
+    letter-spacing: 5px;
+    text-align: center;
+  }
+
   .pad {
-    width: 90%;
-    padding: 15px;
+    width: 80%;
+    padding: 16px;
   }
 
   .key {
-    width: 85px;
-    height: 85px;
+    width: 90px;
+    height: 90px;
     font-size: 18px;
   }
+}
 
-  h1 {
-    font-size: 8vw;
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 5vw;
+    letter-spacing: 3px;
+  }
+
+  .pad {
+    width: 95%;
+    padding: 14px;
+  }
+
+  .key {
+    width: 75px;
+    height: 75px;
+    font-size: 16px;
+  }
+
+  .sound {
+    font-size: 11px;
   }
 }
